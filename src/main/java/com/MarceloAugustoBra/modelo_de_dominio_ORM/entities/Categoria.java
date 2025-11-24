@@ -12,6 +12,7 @@ public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    //não usei @Column(columnDefinition = "TEXT"), porque a descrição da categoria é curta, como se fosse um nome.
     private String descricao;
 
     @OneToMany(mappedBy = "categoria")

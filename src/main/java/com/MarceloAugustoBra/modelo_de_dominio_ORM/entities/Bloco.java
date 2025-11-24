@@ -10,7 +10,10 @@ public class Bloco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Instant incio;
+    //salva o horário que foi enviado
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    private Instant inicio;
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant fim;
 
     @ManyToOne
@@ -19,9 +22,9 @@ public class Bloco {
 
     public Bloco(){};
 
-    public Bloco(Integer id, Instant incio, Instant fim, Atividade atividade) {
+    public Bloco(Integer id, Instant inicio, Instant fim, Atividade atividade) {
         this.id = id;
-        this.incio = incio;
+        this.inicio = inicio;
         this.fim = fim;
         this.atividade = atividade;
     }
@@ -35,11 +38,11 @@ public class Bloco {
     }
 
     public Instant getIncio() {
-        return incio;
+        return inicio;
     }
 
     public void setIncio(Instant incio) {
-        this.incio = incio;
+        this.inicio = incio;
     }
 
     public Instant getFim() {

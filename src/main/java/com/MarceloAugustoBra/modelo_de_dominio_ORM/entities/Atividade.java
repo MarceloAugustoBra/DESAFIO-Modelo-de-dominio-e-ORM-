@@ -2,7 +2,9 @@ package com.MarceloAugustoBra.modelo_de_dominio_ORM.entities;
 
 import jakarta.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_atividade")
@@ -11,9 +13,11 @@ public class Atividade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
+    private String nome;
+    //Essa coluna será um texto longo e não um varchar.
+    @Column(columnDefinition = "TEXT")
     private String descricao;
-    private Double price;
+    private Double preco;
 
     @ManyToOne
     @JoinColumn(name = "categoria_id")
@@ -22,13 +26,16 @@ public class Atividade {
     @OneToMany(mappedBy = "atividade")
     private List<Bloco> blocos = new ArrayList<>();
 
+    @ManyToMany(mappedBy = "atividade")
+    private Set<Participante> participante = new HashSet<>();
+
     public Atividade(){}
 
-    public Atividade(Integer id, String name, String descricao, Double price, Categoria categoria) {
+    public Atividade(Integer id, String nome, String descricao, Double preco, Categoria categoria) {
         this.id = id;
-        this.name = name;
+        this.nome = nome;
         this.descricao = descricao;
-        this.price = price;
+        this.preco = preco;
         this.categoria = categoria;
     }
 
@@ -40,12 +47,12 @@ public class Atividade {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getnome() {
+        return nome;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setnome(String nome) {
+        this.nome = nome;
     }
 
     public String getDescricao() {
@@ -56,12 +63,12 @@ public class Atividade {
         this.descricao = descricao;
     }
 
-    public Double getPrice() {
-        return price;
+    public Double getpreco() {
+        return preco;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setpreco(Double preco) {
+        this.preco = preco;
     }
 
     public Categoria getCategoria() {
@@ -70,5 +77,13 @@ public class Atividade {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public List<Bloco> getBlocos() {
+        return blocos;
+    }
+
+    public Set<Participante> getParticipantes() {
+        return participante;
     }
 }
