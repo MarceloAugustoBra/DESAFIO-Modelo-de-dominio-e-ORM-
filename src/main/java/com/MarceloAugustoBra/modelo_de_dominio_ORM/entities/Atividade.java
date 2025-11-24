@@ -19,13 +19,17 @@ public class Atividade {
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
+    @OneToMany(mappedBy = "atividade")
+    private List<Bloco> blocos = new ArrayList<>();
+
     public Atividade(){}
 
-    public Atividade(Integer id, String name, String descricao, Double price) {
+    public Atividade(Integer id, String name, String descricao, Double price, Categoria categoria) {
         this.id = id;
         this.name = name;
         this.descricao = descricao;
         this.price = price;
+        this.categoria = categoria;
     }
 
     public Integer getId() {
@@ -58,5 +62,13 @@ public class Atividade {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 }
